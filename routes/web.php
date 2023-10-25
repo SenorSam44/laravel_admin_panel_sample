@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\PageDetailsController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SubProfileController;
 use App\Http\Controllers\SessionsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
@@ -30,6 +33,8 @@ Route::get('sign-in', [SessionsController::class, 'create'])->middleware('guest'
 Route::post('sign-in', [SessionsController::class, 'store'])->middleware('guest');
 Route::post('verify', [SessionsController::class, 'show'])->middleware('guest');
 Route::post('reset-password', [SessionsController::class, 'update'])->middleware('guest')->name('password.update');
+
+
 Route::get('verify', function () {
 	return view('sessions.password.verify');
 })->middleware('guest')->name('verify');
@@ -62,10 +67,24 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('static-sign-up', function () {
 		return view('pages.static-sign-up');
 	})->name('static-sign-up');
-	Route::get('user-management', function () {
-		return view('pages.laravel-examples.user-management');
-	})->name('user-management');
+
 	Route::get('user-profile', function () {
 		return view('pages.laravel-examples.user-profile');
 	})->name('user-profile');
+
+    Route::get('about-us', function (){
+        return view('pages.about-us.details');
+    })->name('about-us-page.details');
+
+    Route::get('page-details/search', [PageDetailsController::class, 'search']);
+    Route::resource('page-details', PageDetailsController::class);
+
+
+//    Route::get('user-management', function () {
+//        return view('pages.laravel-examples.user-management');
+//    })->name('user-management');
+	Route::resource('user-management', SubProfileController::class);
+    Route::resource('expenses', ExpenseController::class);
+
+
 });

@@ -8,7 +8,7 @@
             aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand m-0 d-flex text-wrap align-items-center" href=" {{ route('dashboard') }} ">
             <img src="{{ asset('assets') }}/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo">
-            <span class="ms-2 font-weight-bold text-white">Material Dashboard 2 Laravel</span>
+            <span class="ms-2 font-weight-bold text-white">Ext4 Solutions Admin Panel</span>
         </a>
     </div>
     <hr class="horizontal light mt-0 mb-2">
@@ -28,7 +28,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link text-white {{ $activePage == 'user-management' ? ' active bg-gradient-primary' : '' }} "
-                    href="{{ route('user-management') }}">
+                    href="{{ route('user-management.index') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i style="font-size: 1rem;" class="fas fa-lg fa-list-ul ps-2 pe-2 text-center"></i>
                     </div>
@@ -56,6 +56,41 @@
                     <span class="nav-link-text ms-1">Tables</span>
                 </a>
             </li>
+{{--            <li class="nav-item">--}}
+{{--                <a class="nav-link text-white {{ $activePage == 'expenses' ? ' active bg-gradient-primary' : '' }}  "--}}
+{{--                   href="{{ route('expenses.index') }}">--}}
+{{--                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">--}}
+{{--                        <i class="material-icons opacity-10">receipt_long</i>--}}
+{{--                    </div>--}}
+{{--                    <span class="nav-link-text ms-1">Expenses</span>--}}
+{{--                </a>--}}
+{{--            </li>--}}
+            <li class="nav-item">
+                <a class="nav-link text-white {{ $activePage == 'expenses' ? 'active bg-gradient-primary' : '' }} toggle-sub-menu"
+                   href="javascript:void(0);">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">receipt_long</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Expenses</span>
+                </a>
+                <ul class="sub-menu" style="{{ in_array($activePage, ['expenses', 'create-expense']) ? 'display: block;' : 'display: none;' }}">
+                    <li class="nav-item">
+                        <a class="nav-link text-white {{ $activePage == 'expenses' ? 'active' : '' }}"
+                           href="{{ route('expenses.index') }}">
+                            <span class="nav-link-text ms-1">Expenses List</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white {{ $activePage == 'create-expense' ? 'active' : '' }}"
+                           href="{{ route('expenses.create') }}">
+                            <span class="nav-link-text ms-1">Add Expense</span>
+                        </a>
+                    </li>
+
+                    <!-- Add more sub-menu items as needed -->
+                </ul>
+            </li>
+
             <li class="nav-item">
                 <a class="nav-link text-white {{ $activePage == 'billing' ? ' active bg-gradient-primary' : '' }}  "
                     href="{{ route('billing') }}">
@@ -93,8 +128,34 @@
                 </a>
             </li>
             <li class="nav-item mt-3">
+                <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Page details</h6>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link text-white {{ $activePage == 'about-us-page' ? ' active bg-gradient-primary' : '' }} "
+                   href="{{ route('about-us-page.details') }}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">A</i>
+                    </div>
+                    <span class="nav-link-text ms-1">About Us</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link text-white {{ $activePage == 'page-history' ? ' active bg-gradient-primary' : '' }} "
+                   href="{{ route('page-details.index') }}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">history</i>
+                    </div>
+                    <span class="nav-link-text ms-1">History</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Account pages</h6>
             </li>
+
             <li class="nav-item">
                 <a class="nav-link text-white {{ $activePage == 'profile' ? ' active bg-gradient-primary' : '' }}  "
                     href="{{ route('profile') }}">
@@ -135,4 +196,13 @@
                 to pro</a>
         </div>
     </div>
+    <script>
+        $(document).ready(function() {
+            $('.toggle-sub-menu').on('click', function() {
+                // Toggle the display of the sub-menu
+                $(this).next('.sub-menu').slideToggle('fast');
+            });
+        });
+    </script>
+
 </aside>
