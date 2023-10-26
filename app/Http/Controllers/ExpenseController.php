@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Expense;
+use App\Models\File;
 use Illuminate\Http\Request;
 
 class ExpenseController extends Controller
@@ -10,20 +11,27 @@ class ExpenseController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $expenses = Expense::all();
+        $type = str_contains($request->route()->uri(), 'expense') ? Expense::TYPE_EXPENSE : Expense::TYPE_INCOME;
+        $expenses = Expense::where('type', $type)->get();
         return view('pages.expense.index', [
             'expenses' => $expenses,
+            'type' => $type
         ]);
     }
 
     /**
      * Show the form for creating a new resource.
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('pages.expense.create');
+        $type = str_contains($request->route()->uri(), 'expense') ? Expense::TYPE_EXPENSE : Expense::TYPE_INCOME;
+        return view('pages.expense.create', [
+            'type' => $type
+        ]);
     }
 
     /**
@@ -31,10 +39,11 @@ class ExpenseController extends Controller
      */
     public function store(Request $request)
     {
-        $id = is_numeric($request->id)? $request->id : null;
+        $id = is_numeric($request->id) ? $request->id : null;
 
         $data = $request->validate([
             'date' => 'required|date',
+            'type' => 'required',
             'description' => 'required',
             'category' => 'required',
             'amount' => 'required|numeric',
@@ -43,6 +52,7 @@ class ExpenseController extends Controller
         // Prepare the data to be used for updating or creating the expense
         $expenseData = [
             'date' => $data['date'],
+            'type' => $data['type'],
             'description' => $data['description'],
             'category' => $data['category'],
             'amount' => $data['amount'],
@@ -70,12 +80,16 @@ class ExpenseController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Request $request, string $id)
     {
+        $type = str_contains($request->route()->uri(), 'expense') ? Expense::TYPE_EXPENSE : Expense::TYPE_INCOME;
         $expense = Expense::findOrfail($id);
-//        dd($expense);
+        $expense_files = File::where('model_related_to', 'expense')->where('model_id', $id)->get();
+
         return view('pages.expense.create', [
-            'expense' => $expense
+            'expense' => $expense,
+            'files' => $expense_files,
+            'type' => $type
         ]);
     }
 

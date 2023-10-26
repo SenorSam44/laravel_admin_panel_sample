@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\FileController;
 use App\Http\Controllers\PageDetailsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubProfileController;
@@ -85,6 +86,8 @@ Route::group(['middleware' => 'auth'], function () {
 //    })->name('user-management');
 	Route::resource('user-management', SubProfileController::class);
     Route::resource('expenses', ExpenseController::class);
-
+    Route::resource('files', FileController::class);
+    Route::post('/files/upload', [FileController::class, 'upload'])->name('files.upload');
+    Route::resource('income', ExpenseController::class);
 
 });

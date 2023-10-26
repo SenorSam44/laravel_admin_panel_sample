@@ -10,6 +10,9 @@ class Expense extends Model
 {
     use HasFactory, SoftDeletes; // Add SoftDeletes trait
 
+    const TYPE_EXPENSE = 'expense';
+    const TYPE_INCOME = 'income';
+
     protected $table = 'expenses'; // Specify the table name if different
 
     protected $fillable = [
@@ -17,6 +20,7 @@ class Expense extends Model
         'description',
         'category',
         'amount',
+        'type'
     ];
 
     protected $dates = ['deleted_at']; // Specify the column for soft delete
@@ -24,6 +28,7 @@ class Expense extends Model
     protected $casts = [
         'date' => 'datetime',
         'amount' => 'integer',
+        'type' => 'integer'
     ];
 
 }

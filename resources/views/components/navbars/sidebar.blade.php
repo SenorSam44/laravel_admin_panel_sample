@@ -86,8 +86,30 @@
                             <span class="nav-link-text ms-1">Add Expense</span>
                         </a>
                     </li>
+                </ul>
+            </li>
 
-                    <!-- Add more sub-menu items as needed -->
+            <li class="nav-item">
+                <a class="nav-link text-white {{ $activePage == 'incomes' ? 'active bg-gradient-primary' : '' }} toggle-sub-menu"
+                   href="javascript:void(0);">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">receipt_long</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Income</span>
+                </a>
+                <ul class="sub-menu" style="{{ in_array($activePage, ['incomes', 'create-income']) ? 'display: block;' : 'display: none;' }}">
+                    <li class="nav-item">
+                        <a class="nav-link text-white {{ $activePage == 'incomes' ? 'active' : '' }}"
+                           href="{{ route('income.index') }}">
+                            <span class="nav-link-text ms-1">Income List</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white {{ $activePage == 'create-income' ? 'active' : '' }}"
+                           href="{{ route('income.create') }}">
+                            <span class="nav-link-text ms-1">Add Income</span>
+                        </a>
+                    </li>
                 </ul>
             </li>
 

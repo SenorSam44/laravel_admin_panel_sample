@@ -11,13 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('expenses', function (Blueprint $table) {
+        Schema::create('files', function (Blueprint $table) {
             $table->id();
-            $table->date('date');
+            $table->string('name');
             $table->string('type');
-            $table->string('description');
-            $table->string('category');
-            $table->decimal('amount', 10, 2);
+            $table->string('location'); // The path to the uploaded file
+            $table->integer('size'); // File size in bytes
+            $table->string('tag')->nullable();
+            $table->string('model_related_to'); // E.g., 'Expense' or 'User'
+            $table->unsignedBigInteger('model_id'); // ID of the related model
             $table->softDeletes($column = 'deleted_at', $precision = 0);
             $table->timestamps();
         });
@@ -28,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('expenses');
+        Schema::dropIfExists('files');
     }
 };
