@@ -40,6 +40,8 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <!-- CSS Files -->
     <link id="pagestyle" href="{{ asset('assets') }}/css/material-dashboard.css?v=3.0.0" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 </head>
 <body class="{{ $bodyClass }}">
 
@@ -58,6 +60,14 @@
         }
         Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
+
+    //   toaster - snackbar
+    // Configure global Toastr options
+    toastr.options = {
+        closeButton: true, // Show a close button on each notification
+        positionClass: 'toast-top-right', // Position the notifications at the top-right
+        timeOut: 3000, // Hide after 3 seconds
+    };
 
 </script>
 <!-- Github buttons -->

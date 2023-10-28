@@ -69,11 +69,13 @@
                 contentType: false,
                 success: function (data) {
                     // Handle success response (e.g., show success message)
+                    toastr.success(data["message"]);
                     console.log(data);
                 },
                 error: function (xhr, status, error) {
                     // Handle error response (e.g., show error message)
                     console.error(error);
+                    toastr.success(error);
                 }
             });
         });
@@ -92,6 +94,7 @@
                 },
                 success: function (data) {
                     console.log(data);
+                    toastr.success(data["message"]);
                     // Handle success response (e.g., remove the deleted file from the DOM)
                     deleteButton.parent().remove(); // Use deleteButton to remove the parent element
 
@@ -99,6 +102,7 @@
                 error: function (xhr, status, error) {
                     // Handle error response (e.g., display an error message)
                     console.error(error);
+                    toastr.success(error);
                 }
             });
         });

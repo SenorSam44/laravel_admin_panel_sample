@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\PageDetailsController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SubProfileController;
 use App\Http\Controllers\SessionsController;
 use Illuminate\Support\Facades\Route;
@@ -89,5 +91,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('files', FileController::class);
     Route::post('/files/upload', [FileController::class, 'upload'])->name('files.upload');
     Route::resource('income', ExpenseController::class);
-
+    Route::resource('projects', ProjectController::class);
+    Route::resource('clients', ClientController::class);
 });

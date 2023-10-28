@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('location'); // The path to the uploaded file
             $table->integer('size'); // File size in bytes
             $table->string('tag')->nullable();
+            $table->unsignedSmallInteger('order')->default(16000);
             $table->string('model_related_to'); // E.g., 'Expense' or 'User'
             $table->unsignedBigInteger('model_id'); // ID of the related model
             $table->softDeletes($column = 'deleted_at', $precision = 0);

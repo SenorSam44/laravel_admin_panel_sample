@@ -18,6 +18,7 @@ class File extends Model
         'location',
         'size',
         'tag',
+        'order',
         'model_related_to',
         'model_id'
     ];

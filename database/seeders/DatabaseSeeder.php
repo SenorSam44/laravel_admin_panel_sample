@@ -14,12 +14,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call([UserSeeder::class]);
 
-        $this->command->info('User table seeded!');
+        $class_array = [
+            'user' => UserSeeder::class,
+            'expense' => ExpenseSeeder::class,
+            'client' => ClientSeeder::class,
+            'project' => ProjectSeeder::class,
 
-        $this->call([ExpenseSeeder::class]);
+        ];
 
-        $this->command->info('Expense table seeded!');
+        foreach ($class_array as $key => $value){
+            $this->call([$value]);
+
+            $this->command->info(ucfirst($key).' table seeded!');
+        }
     }
 }
