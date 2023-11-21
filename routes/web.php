@@ -3,6 +3,7 @@
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\PageDetailsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
@@ -93,4 +94,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('income', ExpenseController::class);
     Route::resource('projects', ProjectController::class);
     Route::resource('clients', ClientController::class);
+    Route::resource('invoices', InvoiceController::class);
+    Route::get('invoices/{id}/pdf-webview', [InvoiceController::class, 'webviewPdf'])->name('invoices.webview-pdf');
+    Route::get('invoices/{id}/pdf', [InvoiceController::class, 'generatePdf']);
+
 });

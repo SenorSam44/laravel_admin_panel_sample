@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             'expense' => ExpenseSeeder::class,
             'client' => ClientSeeder::class,
             'project' => ProjectSeeder::class,
+            'invoice' => InvoiceSeeder::class,
 
         ];
 

@@ -81,6 +81,31 @@
                     </li>
                 </ul>
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link text-white {{ $activePage == 'invoices' ? 'active bg-gradient-primary' : '' }} toggle-sub-menu"
+                   href="javascript:void(0);">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">receipt_long</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Invoice</span>
+                </a>
+                <ul class="sub-menu" style="{{ in_array($activePage, ['invoices', 'create-invoice']) ? 'display: block;' : 'display: none;' }}">
+                    <li class="nav-item">
+                        <a class="nav-link text-white {{ $activePage == 'invoices' ? 'active' : '' }}"
+                           href="{{ route('invoices.index') }}">
+                            <span class="nav-link-text ms-1">Invoice List</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white {{ $activePage == 'create-invoice' ? 'active' : '' }}"
+                           href="{{ route('invoices.create') }}">
+                            <span class="nav-link-text ms-1">Create Invoice</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
             <li class="nav-item">
                 <a class="nav-link text-white {{ $activePage == 'expenses' ? 'active bg-gradient-primary' : '' }} toggle-sub-menu"
                    href="javascript:void(0);">
